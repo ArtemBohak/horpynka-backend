@@ -22,13 +22,31 @@ export class OrdersService {
     limit = 10,
   }: { page?: number; limit?: number } = {}): Promise<Order[]> {
     return this.orderRepository.find({
+      relations: {
+        orderItems: {
+          dish: true,
+          product: true,
+        },
+      },
       skip: (page - 1) * limit,
       take: limit,
     });
   }
 
   async findOne(id: number): Promise<Order> {
-    const order = await this.orderRepository.findOneBy({ id });
+    const order = await this.orderRepository.findOne({
+      where: { id },
+      relations: {
+        orderItems: {
+          dish: {
+            category: true,
+          },
+          product: {
+            category: true,
+          },
+        },
+      },
+    });
     if (!order) {
       throw new NotFoundException(`Order #${id} not found`);
     }

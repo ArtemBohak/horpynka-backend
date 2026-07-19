@@ -12,14 +12,17 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: 'text' })
+  name: string;
+
   @Column({ type: 'integer' })
   own_price: number;
 
   @Column({ type: 'integer' })
   selling_price: number;
 
-  @Column({ name: 'category_id' })
-  category_id: number;
+  @Column({ name: 'category_id', nullable: true })
+  category_id: number | null;
 
   @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id' })

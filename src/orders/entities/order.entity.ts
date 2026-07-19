@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { OrderItem } from './order-item.entity';
 
 export enum OrderStatus {
   CREATED = 'CREATED',
@@ -47,4 +49,7 @@ export class Order {
 
   @Column()
   refunded_with_card: number;
+
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  orderItems: OrderItem[];
 }

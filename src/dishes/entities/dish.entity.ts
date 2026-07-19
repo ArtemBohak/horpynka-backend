@@ -14,8 +14,11 @@ export class Dish {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'category_id' })
-  category_id: number;
+  @Column({ type: 'text' })
+  name: string;
+
+  @Column({ name: 'category_id', nullable: true })
+  category_id: number | null;
 
   @ManyToOne(() => Category, (category) => category.dishes)
   @JoinColumn({ name: 'category_id' })

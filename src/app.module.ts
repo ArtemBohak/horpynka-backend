@@ -4,6 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { OrdersModule } from './orders/orders.module';
+import { CategoriesModule } from './categories/categories.module';
+import { DishesModule } from './dishes/dishes.module';
+import { IngredientsModule } from './ingredients/ingredients.module';
+import { UsersModule } from './users/users.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -29,6 +34,11 @@ import { OrdersModule } from './orders/orders.module';
         synchronize: false,
       }),
     }),
+    CategoriesModule,
+    DishesModule,
+    IngredientsModule,
+    UsersModule,
+    ProductsModule,
     OrdersModule,
   ],
   controllers: [AppController],
