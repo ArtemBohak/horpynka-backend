@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Repository } from 'typeorm';
-import { Order } from './entities/order.entity';
+import { Order, OrderStatus } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -20,7 +20,10 @@ export class OrdersService {
   findAll({
     page = 1,
     limit = 10,
-  }: { page?: number; limit?: number } = {}): Promise<Order[]> {
+    status = OrderStatus.CREATED,
+  }: { page?: number; limit?: number; status?: OrderStatus } = {}): Promise<
+    Order[]
+  > {
     return this.orderRepository.find({
       relations: {
         orderItems: {
@@ -30,6 +33,9 @@ export class OrdersService {
       },
       skip: (page - 1) * limit,
       take: limit,
+      where: {
+        status,
+      },
     });
   }
 
@@ -62,5 +68,11 @@ export class OrdersService {
   async remove(id: number): Promise<void> {
     const order = await this.findOne(id);
     await this.orderRepository.remove(order);
+  }
+
+  async removeActiveReceipt(id: number): Promise<Order> {
+    const order = await this.findOne(id);
+    order.status = OrderStatus.DELETED;
+    return this.orderRepository.save(order);
   }
 }

@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   DefaultValuePipe,
   ParseIntPipe,
@@ -14,7 +13,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { Order } from './entities/order.entity';
+import { Order, OrderStatus } from './entities/order.entity';
 
 @ApiTags('orders')
 @Controller('orders')
@@ -30,25 +29,27 @@ export class OrdersController {
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page?: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
+    @Query('status', new DefaultValuePipe(OrderStatus.CREATED))
+    status?: OrderStatus,
   ): Promise<Order[]> {
-    return this.ordersService.findAll({ page, limit });
+    return this.ordersService.findAll({ page, limit, status });
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Order> {
-    return this.ordersService.findOne(+id);
+  findOne(@Param('id') id: number): Promise<Order> {
+    return this.ordersService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateOrderDto: UpdateOrderDto,
   ): Promise<Order> {
-    return this.ordersService.update(+id, updateOrderDto);
+    return this.ordersService.update(id, updateOrderDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.ordersService.remove(+id);
+  @Patch('/remove-active-receipt/:id')
+  removeActiveReceipt(@Param('id') id: number): Promise<Order> {
+    return this.ordersService.removeActiveReceipt(id);
   }
 }
