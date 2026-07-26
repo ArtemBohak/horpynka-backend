@@ -9,6 +9,7 @@ import { DishesModule } from './dishes/dishes.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ProductsModule } from './products/products.module';
         entities: [],
         autoLoadEntities: true,
         migrations: ['./migrations/*.ts'],
+        namingStrategy: new SnakeNamingStrategy(),
         invalidWhereValuesBehavior: {
           null: 'sql-null',
           undefined: 'ignore',

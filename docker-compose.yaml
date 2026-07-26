@@ -15,12 +15,13 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      NODE_ENV: development
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "yarn migration:run && yarn dev"
+    command: sh -c "yarn install --frozen-lockfile --check-files --production=false && yarn migration:run && yarn dev"
 
   db:
     image: postgres:16-alpine

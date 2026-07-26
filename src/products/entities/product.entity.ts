@@ -16,13 +16,13 @@ export class Product {
   name: string;
 
   @Column({ type: 'integer' })
-  own_price: number;
+  ownPrice: number;
 
   @Column({ type: 'integer' })
-  selling_price: number;
+  sellingPrice: number;
 
   @Column({ name: 'category_id', nullable: true })
-  category_id: number | null;
+  categoryId: number | null;
 
   @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id' })
@@ -32,8 +32,8 @@ export class Product {
   selling: boolean;
 
   @Column({ type: 'date' })
-  created_at: Date;
+  createdAt: Date;
 
   @Column({ type: 'date' })
-  updated_at: Date;
+  updatedAt: Date;
 }

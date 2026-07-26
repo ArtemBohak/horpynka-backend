@@ -28,8 +28,8 @@ export class OrdersController {
 
   @Get()
   findAll(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page?: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
   ): Promise<Order[]> {
     return this.ordersService.findAll({ page, limit });
   }

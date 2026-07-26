@@ -19,22 +19,22 @@ export class OrderItem {
   id: number;
 
   @Column({ type: 'integer' })
-  selling_price: number;
+  sellingPrice: number;
 
   @Column({ type: 'text', nullable: true })
   discount: string | null;
 
   @Column({ type: 'text' })
-  discount_type: string;
+  discountType: string;
 
   @Column({ name: 'dish_id', nullable: true })
-  dish_id: number | null;
+  dishId: number | null;
 
   @Column({ name: 'product_id', nullable: true })
-  product_id: number | null;
+  productId: number | null;
 
   @Column({ name: 'order_id', nullable: true })
-  order_id: number | null;
+  orderId: number | null;
 
   @ManyToOne(() => Dish)
   @JoinColumn({ name: 'dish_id' })

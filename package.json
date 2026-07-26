@@ -13,8 +13,9 @@
     "type-check": "tsc --noEmit",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "migration:generate": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/database/db-data-source.ts migration:generate ./src/migrations/migration",
-    "migration:run": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/database/db-data-source.ts migration:run",
+    "migration:generate": "node -r ts-node/register ./node_modules/typeorm/cli.js -d ./src/database/db-data-source.ts migration:generate ./src/migrations/migration",
+    "migration:run": "node -r ts-node/register ./node_modules/typeorm/cli.js -d ./src/database/db-data-source.ts migration:run",
+    "migration:run:prod": "node ./node_modules/typeorm/cli.js -d ./dist/database/db-data-source.js migration:run",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "seed": "ts-node --project tsconfig.seed.json src/database/seed.ts"
   },
@@ -34,7 +35,8 @@
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.28"
+    "typeorm": "^0.3.28",
+    "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

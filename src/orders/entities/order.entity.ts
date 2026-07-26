@@ -30,25 +30,25 @@ export class Order {
   status: OrderStatus;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
   @Column()
-  order_price: number;
+  orderPrice: number;
 
   @Column()
-  paid_with_cash: number;
+  paidWithCash: number;
 
   @Column()
-  paid_with_card: number;
+  paidWithCard: number;
 
   @Column()
-  refunded_with_cash: number;
+  refundedWithCash: number;
 
   @Column()
-  refunded_with_card: number;
+  refundedWithCard: number;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
   orderItems: OrderItem[];

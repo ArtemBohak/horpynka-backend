@@ -18,27 +18,27 @@ export class Dish {
   name: string;
 
   @Column({ name: 'category_id', nullable: true })
-  category_id: number | null;
+  categoryId: number | null;
 
   @ManyToOne(() => Category, (category) => category.dishes)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
   @Column({ type: 'integer' })
-  own_price: number;
+  ownPrice: number;
 
   @Column({ type: 'integer' })
-  selling_price: number;
+  sellingPrice: number;
 
   @Column({ type: 'boolean', default: true })
   selling: boolean;
 
   @Column({ type: 'date' })
-  created_at: Date;
+  createdAt: Date;
 
   @Column({ type: 'date' })
-  updated_at: Date;
+  updatedAt: Date;
 
   @OneToMany(() => DishIngredient, (di) => di.dish)
-  dish_ingredients: DishIngredient[];
+  dishIngredients: DishIngredient[];
 }

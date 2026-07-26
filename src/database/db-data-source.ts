@@ -7,7 +7,8 @@ import { OrderItem } from '../orders/entities/order-item.entity';
 import { Ingredient } from '../ingredients/entities/ingredient.entity';
 import { DishIngredient } from '../dishes/entities/dish-ingredient.entity';
 import { Dish } from '../dishes/entities/dish.entity';
-import { Category } from 'src/categories/entities/category.entity';
+import { Category } from '../categories/entities/category.entity';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ const AppDataSource = new DataSource({
       : 'src/migrations/*.ts',
   ],
   synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
 });
 
 export default AppDataSource;

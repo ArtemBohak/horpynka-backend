@@ -10,25 +10,25 @@ export class CreateOrderDto {
   /** @example 28500 */
   @IsInt()
   @Min(0)
-  order_price: number;
+  orderPrice: number;
 
   /** @example 28500 */
   @IsInt()
   @Min(0)
-  paid_with_cash: number;
+  paidWithCash: number;
 
   /** @example 0 */
   @IsInt()
   @Min(0)
-  paid_with_card: number;
+  paidWithCard: number;
 
   /** @example 0 */
   @IsInt()
   @Min(0)
-  refunded_with_cash: number;
+  refundedWithCash: number;
 
   /** @example 0 */
   @IsInt()
   @Min(0)
-  refunded_with_card: number;
+  refundedWithCard: number;
 }
