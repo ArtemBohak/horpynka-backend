@@ -31,6 +31,7 @@ async function bootstrap() {
       transform: true, // transform payloads to be objects typed according to their DTO classes
     }),
   );
+  console.log('test')
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();
